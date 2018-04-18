@@ -23,3 +23,11 @@ def test_copyright():
     if b:
         ans=True
     assert ans
+
+def test_author():
+    b=re.search(r'author',docstring, re.IGNORECASE)
+    assert b
+
+def test_date():
+    b=re.search(r'date',docstring, re.IGNORECASE)
+    assert b

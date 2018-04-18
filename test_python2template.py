@@ -2,6 +2,7 @@
 
 ''' test_python2template.def
 using pytest
+last test should fail until all QQQQ entries are replaced
 '''
 
 import python2template
@@ -31,3 +32,11 @@ def test_author():
 def test_date():
     b=re.search(r'date',docstring, re.IGNORECASE)
     assert b
+
+def test_description():
+    b=re.search(r'description',docstring, re.IGNORECASE)
+    assert b
+
+def test_no_QQQQ():
+    b=re.search(r'QQQQ',docstring)
+    assert not b

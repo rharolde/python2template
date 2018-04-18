@@ -1,6 +1,7 @@
 #!/usr/bin/env python2
 
 ''' title   QQQQ
+Version QQQQ
 Copyright (C) QQQQ
 Author QQQQ
 Date QQQQ

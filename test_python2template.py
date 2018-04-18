@@ -37,6 +37,10 @@ def test_description():
     b=re.search(r'description',docstring, re.IGNORECASE)
     assert b
 
+def test_version():
+    b=re.search(r'version',docstring, re.IGNORECASE)
+    assert b
+
 def test_no_QQQQ():
     b=re.search(r'QQQQ',docstring)
     assert not b

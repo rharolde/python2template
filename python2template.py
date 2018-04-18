@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 
 ''' title   QQQQ
-Copyright (c) QQQQ
+Copyright (C) QQQQ
 Author QQQQ
 Date QQQQ
 

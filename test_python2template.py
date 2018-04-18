@@ -5,25 +5,21 @@ using pytest
 '''
 
 import python2template
+import re
 
-print(python2template.__doc__)
+mypackage=python2template
 
-def chkdocstring():
-    return python2template.__doc__
+docstring=mypackage.__doc__
 
-def test_chkdocstring():
-    assert chkdocstring()
+def test_docstring():
+    assert docstring
 
-
-'''
-def foo():
-    doc = "The [object Object] property."
-    def fget(self):
-        return self._[object Object]
-    def fset(self, value):
-        self._[object Object] = value
-    def fdel(self):
-        del self._[object Object]
-    return locals()
- = property(**())
-'''
+def test_copyright():
+    ans=False
+    b=re.search(r'copyright',docstring, re.IGNORECASE)
+    if b:
+        ans=True
+    b=re.search(r'\(c\)',docstring, re.IGNORECASE)
+    if b:
+        ans=True
+    assert ans

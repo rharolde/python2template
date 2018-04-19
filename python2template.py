@@ -16,10 +16,10 @@ with the appropriate information
 '''
 
 def QQQQ():
-	print "function QQQQ"
+    print "function QQQQ"
 
 def main():
-	print "QQQQ"
+    print "QQQQ"
 
 if __name__ == "__main__":
-	main()
+    main()

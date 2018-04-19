@@ -1,46 +1,57 @@
 #!/usr/bin/env python2
 
-''' test_python2template.def
-using pytest
+''' test_python2template.def using pytest
+
 last test should fail until all QQQQ entries are replaced
+this passes pylint
 '''
 
-import python2template
 import re
+import python2template
 
-mypackage=python2template
+MYPACKAGE = python2template
 
-docstring=mypackage.__doc__
+DOCSTRING = MYPACKAGE.__doc__
 
 def test_docstring():
-    assert docstring
+    '''check that docstring exists'''
+    assert DOCSTRING
 
 def test_copyright():
-    ans=False
-    b=re.search(r'copyright',docstring, re.IGNORECASE)
-    if b:
-        ans=True
-    b=re.search(r'\(c\)',docstring, re.IGNORECASE)
-    if b:
-        ans=True
+    '''check that copyright exists, with written out or shorthand'''
+    ans = False
+    result = re.search(r'copyright', DOCSTRING, re.IGNORECASE)
+    if result:
+        ans = True
+    result = re.search(r'\(c\)', DOCSTRING, re.IGNORECASE)
+    if result:
+        ans = True
     assert ans
 
 def test_author():
-    b=re.search(r'author',docstring, re.IGNORECASE)
-    assert b
+    '''check that author line exists'''
+    result = re.search(r'author', DOCSTRING, re.IGNORECASE)
+    assert result
 
 def test_date():
-    b=re.search(r'date',docstring, re.IGNORECASE)
-    assert b
+    '''check that date exists'''
+    result = re.search(r'date', DOCSTRING, re.IGNORECASE)
+    assert result
 
 def test_description():
-    b=re.search(r'description',docstring, re.IGNORECASE)
-    assert b
+    '''check that desciption exists'''
+    result = re.search(r'description', DOCSTRING, re.IGNORECASE)
+    assert result
 
 def test_version():
-    b=re.search(r'version',docstring, re.IGNORECASE)
-    assert b
+    '''check that version exists'''
+    result = re.search(r'version', DOCSTRING, re.IGNORECASE)
+    assert result
 
-def test_no_QQQQ():
-    b=re.search(r'QQQQ',docstring)
-    assert not b
+def test_no_qqqq():
+    '''check that all QQQQ have been replaced
+
+    This test is expected to fail when starting out
+    '''
+    result = re.search(r'QQQQ', DOCSTRING)
+    assert not result

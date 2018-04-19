@@ -26,7 +26,7 @@ def my_qqqq():
 
 def main():
     '''docstring for main QQQQ'''
-    print "QQQQ"
+    my_qqqq()
 
 if __name__ == "__main__":
     main()

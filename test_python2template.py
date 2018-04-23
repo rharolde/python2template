@@ -7,6 +7,7 @@ this passes pylint
 '''
 
 import re
+import subprocess
 import python2template
 
 MYPACKAGE = python2template
@@ -47,6 +48,11 @@ def test_version():
     '''check that version exists'''
     result = re.search(r'version', DOCSTRING, re.IGNORECASE)
     assert result
+
+def test_run():
+    '''check that program runs and outputs correctly'''
+    output = subprocess.check_output("./python2template.py")
+    assert output == "function QQQQ\n"
 
 def test_no_qqqq():
     '''check that all QQQQ have been replaced

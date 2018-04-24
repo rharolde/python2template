@@ -54,6 +54,12 @@ def test_run():
     output = subprocess.check_output("./python2template.py")
     assert output == "function QQQQ\n"
 
+def test_help():
+    '''check -h and --help'''
+    output = subprocess.check_output(["./python2template.py","-h"])
+    result = re.search(r'usage', output, re.IGNORECASE)
+    assert result
+
 def test_no_qqqq():
     '''check that all QQQQ have been replaced
 

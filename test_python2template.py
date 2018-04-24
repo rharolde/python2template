@@ -66,6 +66,18 @@ def test_help_long():
     result = re.search(r'usage', output, re.IGNORECASE)
     assert result
 
+def test_unrecognized_arg():
+    '''test an argument that is not defined
+    should get no stdout, error on stderr, and non-zero return code'''
+    proc = subprocess.Popen(["./python2template.py","--unrecognized_arg"],
+    bufsize=4096,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    returncode = proc.wait()
+    assert returncode == 2
+    stdout, stderr = proc.communicate()
+    assert stdout == ''
+    result = re.search(r'unrecognized argument', stderr, re.IGNORECASE)
+    assert result
+
 def test_no_qqqq():
     '''check that all QQQQ have been replaced
 

@@ -55,8 +55,14 @@ def test_run():
     assert output == "function QQQQ\n"
 
 def test_help():
-    '''check -h and --help'''
+    '''check -h'''
     output = subprocess.check_output(["./python2template.py","-h"])
+    result = re.search(r'usage', output, re.IGNORECASE)
+    assert result
+
+def test_help_long():
+    '''check --help'''
+    output = subprocess.check_output(["./python2template.py","--help"])
     result = re.search(r'usage', output, re.IGNORECASE)
     assert result
 

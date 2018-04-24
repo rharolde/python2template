@@ -20,7 +20,6 @@ This template passes pylint
 2018/04/11  rharolde@umich.edu
 todo:
 command line parameters using argparse
-help
 debug
 verbose
 quiet
@@ -28,8 +27,8 @@ config file using configparser
 '''
 
 import argparse
-parser = argparse.ArgumentParser()
-parser.parse_args()
+PARSER = argparse.ArgumentParser()
+PARSER.parse_args()
 
 def my_qqqq():
     '''an example function QQQQ'''

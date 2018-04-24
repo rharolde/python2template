@@ -56,21 +56,24 @@ def test_run():
 
 def test_help():
     '''check -h'''
-    output = subprocess.check_output(["./python2template.py","-h"])
+    output = subprocess.check_output(["./python2template.py", "-h"])
     result = re.search(r'usage', output, re.IGNORECASE)
     assert result
 
 def test_help_long():
     '''check --help'''
-    output = subprocess.check_output(["./python2template.py","--help"])
+    output = subprocess.check_output(["./python2template.py", "--help"])
     result = re.search(r'usage', output, re.IGNORECASE)
     assert result
 
 def test_unrecognized_arg():
     '''test an argument that is not defined
     should get no stdout, error on stderr, and non-zero return code'''
-    proc = subprocess.Popen(["./python2template.py","--unrecognized_arg"],
-    bufsize=4096,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    proc = subprocess.Popen(
+        ["./python2template.py", "--unrecognized_arg"],
+        bufsize=4096,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE)
     returncode = proc.wait()
     assert returncode == 2
     stdout, stderr = proc.communicate()

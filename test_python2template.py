@@ -8,10 +8,10 @@ this passes pylint
 
 import re
 import subprocess
-import python2template
+import importlib
 
-MYPACKAGE = python2template
-
+PACKAGENAME = 'python2template'
+MYPACKAGE = importlib.import_module(PACKAGENAME)
 DOCSTRING = MYPACKAGE.__doc__
 
 def test_docstring():
@@ -51,18 +51,18 @@ def test_version():
 
 def test_run():
     '''check that program runs and outputs correctly'''
-    output = subprocess.check_output("./python2template.py")
+    output = subprocess.check_output("./" + PACKAGENAME + ".py")
     assert output == "function QQQQ\n"
 
 def test_help():
     '''check -h'''
-    output = subprocess.check_output(["./python2template.py", "-h"])
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-h"])
     result = re.search(r'usage', output, re.IGNORECASE)
     assert result
 
 def test_help_long():
     '''check --help'''
-    output = subprocess.check_output(["./python2template.py", "--help"])
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--help"])
     result = re.search(r'usage', output, re.IGNORECASE)
     assert result
 
@@ -70,7 +70,7 @@ def test_unrecognized_arg():
     '''test an argument that is not defined
     should get no stdout, error on stderr, and non-zero return code'''
     proc = subprocess.Popen(
-        ["./python2template.py", "--unrecognized_arg"],
+        ["./" + PACKAGENAME + ".py", "--unrecognized_arg"],
         bufsize=4096,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE)

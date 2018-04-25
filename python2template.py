@@ -27,7 +27,10 @@ config file using configparser
 '''
 
 import argparse
+
+__version__ = '0.1'
 PARSER = argparse.ArgumentParser()
+PARSER.add_argument('--version', action='version', version='%(prog)s ' + __version__)
 PARSER.parse_args()
 
 def main():

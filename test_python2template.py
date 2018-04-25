@@ -81,10 +81,17 @@ def test_unrecognized_arg():
     result = re.search(r'unrecognized argument', stderr, re.IGNORECASE)
     assert result
 
+def test_version():
+    '''check --version'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--version"], stderr=subprocess.STDOUT)
+    result = re.search(PACKAGENAME + '.py ' + MYPACKAGE.__version__, output, re.IGNORECASE)
+    assert result
+
 def test_no_qqqq():
     '''check that all QQQQ have been replaced
 
     This test is expected to fail when starting out
+    Keep this as the last test
     '''
     result = re.search(r'QQQQ', DOCSTRING)
     assert not result

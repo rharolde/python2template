@@ -52,7 +52,7 @@ def test_version():
 def test_run():
     '''check that program runs and outputs correctly'''
     output = subprocess.check_output("./" + PACKAGENAME + ".py")
-    assert output == "function QQQQ\n"
+    assert output == "do something QQQQ\n"
 
 def test_help():
     '''check -h'''

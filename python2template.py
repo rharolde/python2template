@@ -30,13 +30,9 @@ import argparse
 PARSER = argparse.ArgumentParser()
 PARSER.parse_args()
 
-def my_qqqq():
-    '''an example function QQQQ'''
-    print "function QQQQ"
-
 def main():
     '''docstring for main QQQQ'''
-    my_qqqq()
+    print 'do something QQQQ'
 
 if __name__ == "__main__":
     main()

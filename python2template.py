@@ -19,14 +19,12 @@ This template passes pylint
 
 2018/04/11  rharolde@umich.edu
 todo:
-command line parameters using argparse
-debug
 config file using configparser
 '''
 
 import argparse
 
-__version__ = '0.1'
+__version__ = '0.2'
 PARSER = argparse.ArgumentParser()
 PARSER.add_argument('--version', action='version', version='%(prog)s ' + __version__)
 PARSER.add_argument('-d', '--debug', dest='debugflags', action='append',

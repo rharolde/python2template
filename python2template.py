@@ -18,15 +18,31 @@ with the appropriate information
 This template passes pylint
 
 2018/04/11  rharolde@umich.edu
+todo:
+config file using configparser
 '''
 
-def my_qqqq():
-    '''an example function QQQQ'''
-    print "function QQQQ"
+import argparse
+
+__version__ = '0.2'
+PARSER = argparse.ArgumentParser()
+PARSER.add_argument('--version', action='version', version='%(prog)s ' + __version__)
+PARSER.add_argument('-d', '--debug', dest='debugflags', action='append',
+                    help='print debug messages of type DEBUG, valid types are: verbose')
+ARGS = PARSER.parse_args()
+DEBUG_FLAGS = ARGS.debugflags
+if not DEBUG_FLAGS:
+    DEBUG_FLAGS = []
+
+def debug(debug_type, msg):
+    '''if DEBUG_FLAGS[debug_type] is set, then print msg'''
+    if debug_type in DEBUG_FLAGS:
+        print msg
 
 def main():
     '''docstring for main QQQQ'''
-    my_qqqq()
+    debug('verbose', 'verbose mode')
+    print 'do something QQQQ'
 
 if __name__ == "__main__":
     main()

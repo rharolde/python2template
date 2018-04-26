@@ -81,9 +81,10 @@ def test_unrecognized_arg():
     result = re.search(r'unrecognized argument', stderr, re.IGNORECASE)
     assert result
 
-def test_version():
+def test_version_option():
     '''check --version'''
-    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--version"], stderr=subprocess.STDOUT)
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--version"],
+                                     stderr=subprocess.STDOUT)
     result = re.search(PACKAGENAME + '.py ' + MYPACKAGE.__version__, output, re.IGNORECASE)
     assert result
 
@@ -91,14 +92,12 @@ def test_debug():
     '''check debug options'''
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-d", "verbose"])
     result = re.search(r'verbose mode', output, re.IGNORECASE)
-    #assert output == ''
     assert result
 
 def test_debug_long():
     '''check debug long options'''
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--debug", "verbose"])
     result = re.search(r'verbose mode', output, re.IGNORECASE)
-    #assert output == ''
     assert result
 
 def test_no_qqqq():

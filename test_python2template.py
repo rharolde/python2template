@@ -89,14 +89,16 @@ def test_version():
 
 def test_debug():
     '''check debug options'''
-    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-d verbose"])
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-d", "verbose"])
     result = re.search(r'verbose mode', output, re.IGNORECASE)
+    #assert output == ''
     assert result
 
 def test_debug_long():
     '''check debug long options'''
-    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-debug verbose"])
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--debug", "verbose"])
     result = re.search(r'verbose mode', output, re.IGNORECASE)
+    #assert output == ''
     assert result
 
 def test_no_qqqq():

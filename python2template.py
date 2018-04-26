@@ -31,14 +31,13 @@ PARSER = argparse.ArgumentParser()
 PARSER.add_argument('--version', action='version', version='%(prog)s ' + __version__)
 PARSER.add_argument('-d', '--debug', dest='debugflags', action='append', help='print debug messages of type DEBUG, valid types are: verbose')
 args = PARSER.parse_args()
-print args
 debugflags = args.debugflags
+if not debugflags:
+    debugflags = []
 
-def debug(xtype,msg):
+def debug(type,msg):
     '''if debugflags[type] is set, then print msg'''
-    print 'xtype ' + xtype
-    print 'msdg ' + msg
-    if xtype in debugflags:
+    if type in debugflags:
         print msg
 
 def main():

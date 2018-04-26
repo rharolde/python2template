@@ -87,6 +87,18 @@ def test_version():
     result = re.search(PACKAGENAME + '.py ' + MYPACKAGE.__version__, output, re.IGNORECASE)
     assert result
 
+def test_debug():
+    '''check debug options'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-d verbose"])
+    result = re.search(r'verbose mode', output, re.IGNORECASE)
+    assert result
+
+def test_debug_long():
+    '''check debug long options'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-debug verbose"])
+    result = re.search(r'verbose mode', output, re.IGNORECASE)
+    assert result
+
 def test_no_qqqq():
     '''check that all QQQQ have been replaced
 

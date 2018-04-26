@@ -21,8 +21,6 @@ This template passes pylint
 todo:
 command line parameters using argparse
 debug
-verbose
-quiet
 config file using configparser
 '''
 
@@ -31,10 +29,21 @@ import argparse
 __version__ = '0.1'
 PARSER = argparse.ArgumentParser()
 PARSER.add_argument('--version', action='version', version='%(prog)s ' + __version__)
-PARSER.parse_args()
+PARSER.add_argument('-d', '--debug', dest='debugflags', action='append', help='print debug messages of type DEBUG, valid types are: verbose')
+args = PARSER.parse_args()
+print args
+debugflags = args.debugflags
+
+def debug(xtype,msg):
+    '''if debugflags[type] is set, then print msg'''
+    print 'xtype ' + xtype
+    print 'msdg ' + msg
+    if xtype in debugflags:
+        print msg
 
 def main():
     '''docstring for main QQQQ'''
+    debug('verbose','verbose mode')
     print 'do something QQQQ'
 
 if __name__ == "__main__":

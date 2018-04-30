@@ -6,6 +6,7 @@ last test should fail until all QQQQ entries are replaced
 this passes pylint
 '''
 
+import os
 import re
 import subprocess
 import importlib
@@ -97,6 +98,21 @@ def test_debug():
 def test_debug_long():
     '''check debug long options'''
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--debug", "verbose"])
+    result = re.search(r'verbose mode', output, re.IGNORECASE)
+    assert result
+
+def test_config_file_variable_not_empty():
+    '''check that docstring exists'''
+    assert MYPACKAGE.config_file  # defined
+    assert len(MYPACKAGE.config_file) > 0
+
+def test_config_file():
+    '''check that config_file is read'''
+    with open(MYPACKAGE.config_file,'w') as f:
+        f.write('[global]\n')
+        f.write('debug=verbose\n')
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py"])
+    os.remove(MYPACKAGE.config_file)
     result = re.search(r'verbose mode', output, re.IGNORECASE)
     assert result
 

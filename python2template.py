@@ -19,12 +19,9 @@ This template passes pylint
 
 2018/04/11  rharolde@umich.edu
 todo:
-config file using configparser
 '''
 
 #from pprint import pprint
-#import argparse
-#import configparser
 import configargparse
 
 # SETTINGS

@@ -22,47 +22,42 @@ todo:
 config file using configparser
 '''
 
-import argparse
-import configparser
+#from pprint import pprint
+#import argparse
+#import configparser
+import configargparse
 
 # SETTINGS
 __version__ = '0.2'
 CONFIG_FILE = ".python2template.ini"
 
-# READ COMMAND LINE ARGUMENTS AND OPTIONS
-PARSER = argparse.ArgumentParser()
-PARSER.add_argument('--version', action='version', version='%(prog)s ' + __version__)
-PARSER.add_argument('-d', '--debug', dest='debugflags', action='append',
-                    help='print debug messages of type DEBUG, valid types are: verbose')
-ARGS = PARSER.parse_args()
-DEBUG_FLAGS = ARGS.debugflags
-if not DEBUG_FLAGS:
-    DEBUG_FLAGS = []
-
-# READ CONFIGURATION file
-CONFIG = configparser.ConfigParser()
-CONFIG.read(CONFIG_FILE)
-try:
-    DEBUG_CONFIG = CONFIG.get("global", "debug")
-    DEBUG_FLAGS.append(DEBUG_CONFIG)
-except configparser.NoOptionError:
-    pass
-except configparser.NoSectionError:
-    pass
+# DEFINE GLOBAL VARIABLES
 
 def debug(debug_type, msg):
-    '''if DEBUG_FLAGS[debug_type] is set, then print msg'''
-    if debug_type in DEBUG_FLAGS:
+    '''if debugflags[debug_type] is set, then print msg'''
+    if debug_type in options.debugflags:
         print msg
 
-def main():
-    '''docstring for main QQQQ'''
+def python2template():
+    '''docstring for python2template function QQQQ'''
+
+    # READ COMMAND LINE AND CONFIG FILE
+    config = configargparse.ArgParser(default_config_files=[CONFIG_FILE])
+    config.add('--configfile', is_config_file=True, help='config file path')
+    config.add('-d', '--debug', dest='debugflags', action='append',
+               help='print debug messages of type DEBUG, valid types are: verbose')
+    global options  # used in debug function
+    options = config.parse_args()
+    if not options.debugflags:
+        options.debugflags = [] # default to empty list rather than None
+
+    # MAIN
     debug('verbose', 'verbose mode')
     print 'do something QQQQ'
-    if DEBUG_FLAGS:
+    if options.debugflags:
         print 'debug flags:'
-        for flag in DEBUG_FLAGS:
+        for flag in options.debugflags:
             print flag
 
 if __name__ == "__main__":
-    main()
+    python2template()

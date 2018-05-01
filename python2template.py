@@ -28,7 +28,7 @@ from pprint import pprint
 
 # SETTINGS
 __version__ = '0.2'
-config_file = ".python2template.ini"
+CONFIG_FILE = ".python2template.ini"
 
 # READ COMMAND LINE ARGUMENTS AND OPTIONS
 PARSER = argparse.ArgumentParser()
@@ -41,11 +41,11 @@ if not DEBUG_FLAGS:
     DEBUG_FLAGS = []
 
 # READ CONFIGURATION file
-config = configparser.ConfigParser()
-config.read(config_file)
+CONFIG = configparser.ConfigParser()
+CONFIG.read(CONFIG_FILE)
 try:
-    debug_config = config.get("global","debug")
-    DEBUG_FLAGS.append(debug_config)
+    DEBUG_CONFIG = CONFIG.get("global", "debug")
+    DEBUG_FLAGS.append(DEBUG_CONFIG)
 except configparser.NoOptionError:
     pass
 except configparser.NoSectionError:

@@ -101,18 +101,17 @@ def test_debug_long():
     result = re.search(r'verbose mode', output, re.IGNORECASE)
     assert result
 
-def test_config_file_variable_not_empty():
+def test_config_file_variable():
     '''check that docstring exists'''
-    assert MYPACKAGE.config_file  # defined
-    assert len(MYPACKAGE.config_file) > 0
+    assert MYPACKAGE.CONFIG_FILE  # defined and not zero length
 
 def test_config_file():
     '''check that config_file is read'''
-    with open(MYPACKAGE.config_file,'w') as f:
-        f.write('[global]\n')
-        f.write('debug=verbose\n')
+    with open(MYPACKAGE.CONFIG_FILE, 'w') as filehandle:
+        filehandle.write('[global]\n')
+        filehandle.write('debug=verbose\n')
     output = subprocess.check_output(["./" + PACKAGENAME + ".py"])
-    os.remove(MYPACKAGE.config_file)
+    os.remove(MYPACKAGE.CONFIG_FILE)
     result = re.search(r'verbose mode', output, re.IGNORECASE)
     assert result
 

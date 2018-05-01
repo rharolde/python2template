@@ -24,7 +24,6 @@ config file using configparser
 
 import argparse
 import configparser
-from pprint import pprint
 
 # SETTINGS
 __version__ = '0.2'
@@ -62,7 +61,8 @@ def main():
     print 'do something QQQQ'
     if DEBUG_FLAGS:
         print 'debug flags:'
-        pprint(DEBUG_FLAGS)
+        for flag in DEBUG_FLAGS:
+            print flag
 
 if __name__ == "__main__":
     main()

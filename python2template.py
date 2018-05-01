@@ -28,8 +28,9 @@ config file using configparser
 import configargparse
 
 # SETTINGS
+__progname__ = 'python2template'
 __version__ = '0.2'
-CONFIG_FILE = ".python2template.ini"
+CONFIG_FILE = '.python2template.ini'
 
 # DEFINE GLOBAL VARIABLES
 
@@ -46,6 +47,7 @@ def python2template():
     config.add('--configfile', is_config_file=True, help='config file path')
     config.add('-d', '--debug', dest='debugflags', action='append',
                help='print debug messages of type DEBUG, valid types are: verbose')
+    config.add('--version', action='version', version=__progname__ + ".py " + __version__)
     global options  # used in debug function
     options = config.parse_args()
     if not options.debugflags:

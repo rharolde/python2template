@@ -99,6 +99,24 @@ def test_debug_long():
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--debug", "config"])
     assert 'Command Line Args:   --debug config' in output
 
+def test_verbose():
+    '''check verbose option'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-v"],
+                                     stderr=subprocess.STDOUT)
+    assert 'INFO:root:logging is at info or above' in output
+
+def test_verbose_long():
+    '''check verbose long option'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--verbose"],
+                                     stderr=subprocess.STDOUT)
+    assert 'INFO:root:logging is at info or above' in output
+
+def test_verbose_repeated():
+    '''check repeated verbose option'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-vv"],
+                                     stderr=subprocess.STDOUT)
+    assert 'DEBUG:root:logging is at debug or above' in output
+
 def test_config_file_variable():
     '''check that CONFIG_FILE constant exists'''
     assert MYPACKAGE.CONFIG_FILE  # defined and not zero length
@@ -106,7 +124,6 @@ def test_config_file_variable():
 def test_config_file():
     '''check that config_file is read'''
     with open(MYPACKAGE.CONFIG_FILE, 'w') as filehandle:
-        #filehandle.write('[global]\n')
         filehandle.write('debug=config\n')
     output = subprocess.check_output(["./" + PACKAGENAME + ".py"])
     os.remove(MYPACKAGE.CONFIG_FILE)

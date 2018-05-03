@@ -44,6 +44,8 @@ def python2template():
     """docstring for python2template function QQQQ"""
     # MAIN
     debug('verbose', 'verbose mode')
+    logging.info('logging is at info or above')
+    logging.debug('logging is at debug or above')
     print 'do something QQQQ'
     if options.debugflags:
         print 'debug flags:'
@@ -56,12 +58,21 @@ if __name__ == "__main__":
     config = configargparse.ArgParser(default_config_files=[CONFIG_FILE])
     config.add('--configfile', is_config_file=True, help='config file path')
     config.add('-d', '--debug', dest='debugflags', action='append',
-               help='print debug messages of type DEBUG, valid types are: verbose')
+               help='print debug messages of type DEBUG, valid types are: config')
     config.add('--version', action='version', version=__progname__ + ".py " + __version__)
-    #global options  # used in debug function
+    config.add_argument('-v', '--verbose', action='count', help='can be repeated up to three times')
     options = config.parse_args()
     if not options.debugflags:
         options.debugflags = [] # default to empty list rather than None
+    logger = logging.getLogger()
+    if options.verbose:
+        if options.verbose > 3:
+            logging.warning('verbose was repeated more than three times')
+            config.print_help()
+        if options.verbose == 1:
+            logger.setLevel(logging.INFO)
+        if options.verbose == 2:
+            logger.setLevel(logging.DEBUG)
 
     # call MAIN
     python2template()

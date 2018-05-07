@@ -6,6 +6,7 @@ last test should fail until all QQQQ entries are replaced
 this passes pylint
 '''
 
+import os
 import re
 import subprocess
 import importlib
@@ -89,16 +90,44 @@ def test_version_option():
     assert result
 
 def test_debug():
-    '''check debug options'''
-    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-d", "verbose"])
-    result = re.search(r'verbose mode', output, re.IGNORECASE)
-    assert result
+    '''check debug config option'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-d", "config"])
+    assert 'Command Line Args:   -d config' in output
 
 def test_debug_long():
-    '''check debug long options'''
-    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--debug", "verbose"])
-    result = re.search(r'verbose mode', output, re.IGNORECASE)
-    assert result
+    '''check debug long option'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--debug", "config"])
+    assert 'Command Line Args:   --debug config' in output
+
+def test_verbose():
+    '''check verbose option'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-v"],
+                                     stderr=subprocess.STDOUT)
+    assert 'INFO:root:logging is at info or above' in output
+
+def test_verbose_long():
+    '''check verbose long option'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--verbose"],
+                                     stderr=subprocess.STDOUT)
+    assert 'INFO:root:logging is at info or above' in output
+
+def test_verbose_repeated():
+    '''check repeated verbose option'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-vv"],
+                                     stderr=subprocess.STDOUT)
+    assert 'DEBUG:root:logging is at debug or above' in output
+
+def test_config_file_variable():
+    '''check that CONFIG_FILE constant exists'''
+    assert MYPACKAGE.CONFIG_FILE  # defined and not zero length
+
+def test_config_file():
+    '''check that config_file is read'''
+    with open(MYPACKAGE.CONFIG_FILE, 'w') as filehandle:
+        filehandle.write('debug=config\n')
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py"])
+    os.remove(MYPACKAGE.CONFIG_FILE)
+    assert 'Config File (.python2template.ini):\n  debug:             config' in output
 
 def test_no_qqqq():
     '''check that all QQQQ have been replaced

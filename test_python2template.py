@@ -15,9 +15,11 @@ PACKAGENAME = 'python2template'
 MYPACKAGE = importlib.import_module(PACKAGENAME)
 DOCSTRING = MYPACKAGE.__doc__
 
+
 def test_docstring():
     '''check that docstring exists'''
     assert DOCSTRING
+
 
 def test_copyright():
     '''check that copyright exists, with written out or shorthand'''
@@ -30,30 +32,36 @@ def test_copyright():
         ans = True
     assert ans
 
+
 def test_author():
     '''check that author line exists'''
     result = re.search(r'author', DOCSTRING, re.IGNORECASE)
     assert result
+
 
 def test_date():
     '''check that date exists'''
     result = re.search(r'date', DOCSTRING, re.IGNORECASE)
     assert result
 
+
 def test_description():
     '''check that desciption exists'''
     result = re.search(r'description', DOCSTRING, re.IGNORECASE)
     assert result
+
 
 def test_version():
     '''check that version exists'''
     result = re.search(r'version', DOCSTRING, re.IGNORECASE)
     assert result
 
+
 def test_run():
     '''check that program runs and outputs correctly'''
     output = subprocess.check_output("./" + PACKAGENAME + ".py")
     assert output == "do something QQQQ\n"
+
 
 def test_help():
     '''check -h'''
@@ -61,11 +69,13 @@ def test_help():
     result = re.search(r'usage', output, re.IGNORECASE)
     assert result
 
+
 def test_help_long():
     '''check --help'''
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--help"])
     result = re.search(r'usage', output, re.IGNORECASE)
     assert result
+
 
 def test_unrecognized_arg():
     '''test an argument that is not defined
@@ -82,22 +92,29 @@ def test_unrecognized_arg():
     result = re.search(r'unrecognized argument', stderr, re.IGNORECASE)
     assert result
 
+
 def test_version_option():
     '''check --version'''
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--version"],
                                      stderr=subprocess.STDOUT)
-    result = re.search(PACKAGENAME + '.py ' + MYPACKAGE.__version__, output, re.IGNORECASE)
+    result = re.search(PACKAGENAME + '.py ' + MYPACKAGE.__version__, output,
+                       re.IGNORECASE)
     assert result
+
 
 def test_debug():
     '''check debug config option'''
-    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-d", "config"])
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-d",
+                                      "config"])
     assert 'Command Line Args:   -d config' in output
+
 
 def test_debug_long():
     '''check debug long option'''
-    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--debug", "config"])
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--debug",
+                                      "config"])
     assert 'Command Line Args:   --debug config' in output
+
 
 def test_verbose():
     '''check verbose option'''
@@ -105,11 +122,13 @@ def test_verbose():
                                      stderr=subprocess.STDOUT)
     assert 'INFO:root:logging is at info or above' in output
 
+
 def test_verbose_long():
     '''check verbose long option'''
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--verbose"],
                                      stderr=subprocess.STDOUT)
     assert 'INFO:root:logging is at info or above' in output
+
 
 def test_verbose_repeated():
     '''check repeated verbose option'''
@@ -117,9 +136,11 @@ def test_verbose_repeated():
                                      stderr=subprocess.STDOUT)
     assert 'DEBUG:root:logging is at debug or above' in output
 
+
 def test_config_file_variable():
     '''check that CONFIG_FILE constant exists'''
     assert MYPACKAGE.CONFIG_FILE  # defined and not zero length
+
 
 def test_config_file():
     '''check that config_file is read'''
@@ -127,7 +148,9 @@ def test_config_file():
         filehandle.write('debug=config\n')
     output = subprocess.check_output(["./" + PACKAGENAME + ".py"])
     os.remove(MYPACKAGE.CONFIG_FILE)
-    assert 'Config File (.python2template.ini):\n  debug:             config' in output
+    assert 'Config File (.python2template.ini):\n  debug:             config' \
+        in output
+
 
 def test_no_qqqq():
     '''check that all QQQQ have been replaced

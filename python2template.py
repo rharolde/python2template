@@ -46,7 +46,7 @@ def debug(debug_type, msg):
 def python2template():
     """docstring for python2template function QQQQ"""
     # MAIN
-    debug('verbose', 'verbose mode')
+    debug('config', 'config mode')
     logging.info('logging is at info or above')
     logging.debug('logging is at debug or above')
     print 'do something QQQQ'
@@ -67,14 +67,14 @@ if __name__ == "__main__":
     config.add('--version', action='version', version=__progname__ + ".py "
                + __version__)
     config.add_argument('-v', '--verbose', action='count',
-                        help='can be repeated up to three times')
+                        help='can be repeated up to two times')
     options = config.parse_args()
     if not options.debugflags:
         options.debugflags = []     # default to empty list rather than None
     logger = logging.getLogger()
     if options.verbose:
-        if options.verbose > 3:
-            logging.warning('verbose was repeated more than three times')
+        if options.verbose > 2:
+            logging.warning('verbose was repeated more than two times')
             config.print_help()
         if options.verbose == 1:
             logger.setLevel(logging.INFO)

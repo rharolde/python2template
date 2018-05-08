@@ -107,6 +107,7 @@ def test_debug():
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-d",
                                       "config"])
     assert 'Command Line Args:   -d config' in output
+    assert 'config mode' in output
 
 
 def test_debug_long():
@@ -142,14 +143,23 @@ def test_config_file_variable():
     assert MYPACKAGE.CONFIG_FILE  # defined and not zero length
 
 
-def test_config_file():
-    '''check that config_file is read'''
+def test_default_config_file():
+    '''check that default config_file is read'''
     with open(MYPACKAGE.CONFIG_FILE, 'w') as filehandle:
         filehandle.write('debug=config\n')
     output = subprocess.check_output(["./" + PACKAGENAME + ".py"])
     os.remove(MYPACKAGE.CONFIG_FILE)
     assert 'Config File (.python2template.ini):\n  debug:             config' \
         in output
+
+
+def test_command_line_config_file():
+    '''check that command line config_file is read'''
+    output = subprocess.check_output(["./" + PACKAGENAME + ".py",
+                                      "--configfile",
+                                      ".python2template.ini.sample"])
+    assert 'Config File (.python2template.ini.sample):' in output
+    assert 'debug:             config' in output
 
 
 def test_no_qqqq():

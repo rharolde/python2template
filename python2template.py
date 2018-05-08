@@ -15,7 +15,8 @@ python2template
 Replace all occurances of QQQQ
 with the appropriate information
 
-This template passes pylint
+This template passes pylint with one change, see .pylintrc
+This template passes flake8
 
 2018/04/11  rharolde@umich.edu
 todo:

@@ -110,6 +110,7 @@ def test_debug():
     assert 'config mode' in output
 
 
+
 def test_debug_long():
     '''check debug long option'''
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--debug",
@@ -141,6 +142,7 @@ def test_verbose_repeated():
 def test_config_file_variable():
     '''check that CONFIG_FILE constant exists'''
     assert MYPACKAGE.CONFIG_FILE  # defined and not zero length
+
 
 
 def test_default_config_file():

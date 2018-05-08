@@ -24,7 +24,7 @@ todo:
 
 # double underscore names
 __progname__ = 'python2template'
-__version__ = '0.2'
+__version__ = '0.3'
 
 # from pprint import pprint
 import logging

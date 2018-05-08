@@ -20,7 +20,6 @@ This template passes flake8
 
 2018/04/11  rharolde@umich.edu
 todo:
--vvv verbose flags using logging
 """
 
 # double underscore names
@@ -34,7 +33,7 @@ import configargparse
 # defaults
 CONFIG_FILE = '.python2template.ini'
 
-# DEFINE GLOBAL VARIABLES
+# define global variables
 
 
 def debug(debug_type, msg):

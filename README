@@ -28,3 +28,5 @@ can be used multiple times ('append' in argparse).
 'configargparse' replaces both argparse and configparse,
 see its "Design Notes" for comparison to similar modules.
 'docopt' is also interesting, but not as complete as configargparse.
+
+Apache License 2.0 - see LICENSE file

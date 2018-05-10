@@ -72,6 +72,7 @@ if __name__ == "__main__":
     if not options.debugflags:
         options.debugflags = []     # default to empty list rather than None
     logger = logging.getLogger()
+    logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s')
     if options.verbose:
         if options.verbose > 2:
             logging.warning('verbose was repeated more than two times')

@@ -122,21 +122,21 @@ def test_verbose():
     '''check verbose option'''
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-v"],
                                      stderr=subprocess.STDOUT)
-    assert 'INFO:root:logging is at info or above' in output
+    assert 'INFO: logging is at info or above' in output
 
 
 def test_verbose_long():
     '''check verbose long option'''
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "--verbose"],
                                      stderr=subprocess.STDOUT)
-    assert 'INFO:root:logging is at info or above' in output
+    assert 'INFO: logging is at info or above' in output
 
 
 def test_verbose_repeated():
     '''check repeated verbose option'''
     output = subprocess.check_output(["./" + PACKAGENAME + ".py", "-vv"],
                                      stderr=subprocess.STDOUT)
-    assert 'DEBUG:root:logging is at debug or above' in output
+    assert 'DEBUG: logging is at debug or above' in output
 
 
 def test_config_file_variable():

@@ -36,7 +36,6 @@ CONFIG_FILE = '.python2template.ini'
 # define global variables
 
 
-
 def debug(debug_type, msg):
     """if debugflags[debug_type] is set, then print msg"""
     if debug_type in options.debugflags:

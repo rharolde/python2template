@@ -5,9 +5,10 @@
 (Note blank line above for docstring)
 title QQQQ
 Version QQQQ
-Copyright (C) QQQQ
 Author QQQQ
 Date QQQQ
+Copyright (C) QQQQ
+Apache License Version 2.0, see LICENSE file
 
 Description QQQQ
 
